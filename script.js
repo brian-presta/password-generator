@@ -1,14 +1,17 @@
 // Assignment code here
+
+
 var characterPools = {
   lower:"abcdefghijklmnopqrstuvwxyz",
   upper:"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   numbers:"0123456789",
   special:" !#$%&'()*+,-./:;<=>?@[\]^_`{|}~" + '"'
 }
+// asks the user how long the password should be
 var askLength = function(){
   length = Number(window.prompt("How many characters should your password contain?"))
   if (!length){
-    window.alert("Please enter a number")
+    window.alert("Please enter a number.")
     length = askLength()
   }
   if (length < 8) {
@@ -21,6 +24,7 @@ var askLength = function(){
   }
   return length
 };
+// asks the user which types of characters should be in their password
 var askCharacters = function() {
   characters = ''
   lower = window.confirm("Should your password have lower case letters?")
@@ -43,13 +47,22 @@ var askCharacters = function() {
     window.alert("Please select at least one type of character to use in your password.")
     characters = askCharacters()
   }
-  return 
+  return characters
 };
+// generates random number between two inputs
+var randomInRange = function(min,max){
+  z = Math.random()
+  return Math.floor(z*(max-min)+min)
+};
+// generates password
 var generatePassword = function() {
+  password = ''
   pwLength = Math.floor(askLength())
   availableCharacters = askCharacters()
-  return availableCharacters
-  // var upperYesNo  = window.prompt()
+  for (x=0; x<pwLength; x++) {
+    password += availableCharacters[randomInRange(0,availableCharacters.length)]
+  }
+  return password
 };
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
