@@ -19,12 +19,36 @@ var askLength = function(){
     window.alert("Passwords may not be longer than 128 characters, please enter a new length.")
     length = askLength()
   }
-  // return password
+  return length
+};
+var askCharacters = function() {
+  characters = ''
+  lower = window.confirm("Should your password have lower case letters?")
+  if (lower) {
+    characters += characterPools.lower
+  }
+  upper = window.confirm("Should your password have upper case letters?")
+  if (upper) {
+    characters += characterPools.upper
+  }
+  numbers = window.confirm("Should your password have numbers?")
+  if (numbers) {
+    characters += characterPools.numbers
+  }
+  special = window.confirm("Should your password have special characters?")
+  if (special) {
+    characters += characterPools.special
+  }
+  if (!characters) {
+    window.alert("Please select at least one type of character to use in your password.")
+    characters = askCharacters()
+  }
+  return 
 };
 var generatePassword = function() {
   pwLength = Math.floor(askLength())
-  availableCharacters = characterPools.lower
-  return pwLength
+  availableCharacters = askCharacters()
+  return availableCharacters
   // var upperYesNo  = window.prompt()
 };
 // Get references to the #generate element
